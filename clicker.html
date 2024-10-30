@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Cover</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            background-color: #445d94;
+            height: 115px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgb(0, 0, 0);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar h2 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-start;
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .sidebar ul li {
+            margin: 0 10px;
+            flex-shrink: 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 15px;
+            display: block;
+            padding: 10px;
+            background-color: #445d94;
+            color: white;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #528e3a;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+        }
+
+        .content-item {
+            background-color: #e1ead1;
+            border: 1px solid #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            margin-right: 20px; /* Добавлено отступ справа */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        ..legend {
+            position: absolute;
+            top: 10px; /* Adjust as needed */
+            right: 10px; /* Adjust as needed */
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px; /* Adjust as needed */
+            width: 150px; /* Adjust as needed */
+        }
+
+        .legend div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .legend-color {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .text-section {
+            flex: 1;
+            margin-right: 20px; /* Отступ справа */
+        }
+
+        .map-section {
+            flex: 2; /* Карта будет занимать больше места */
+        }
+
+        .content-item:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .content-item h1 {
+            font-size: 24px;
+            color: #272222;
+        }
+
+        .content-item p {
+            font-size: 18px;
+            color: #000000;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .content-item p:hover {
+            color: #000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffffff;
+            border: 2px solid #445d94;
+            border-radius: 25px;
+            padding: 5px 10px;
+        }
+
+        .language-switcher select {
+            border: none;
+            background: none;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <select onchange="switchLanguage(this.value)">
+            <option value="kz">Қазақша</option>
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
+    </div>
+
+    <div class="sidebar">
+        <h2 id="sidebar-heading">Анализ новостройки🏗</h2>
+        <ul id="nav-links">
+            <li><a href="#item0" onclick="showContent('item0')">Главная🏠</a></li>
+            <li><a href="#item1" onclick="showContent('item1')">Молодёжи🥷</a></li>
+            <li><a href="#item2" onclick="showContent('item2')">Бизнесмены💸</a></li>
+            <li><a href="#item3" onclick="showContent('item3')">Спортсмены🏆</a></li>
+            <li><a href="#item4" onclick="showContent('item4')">Пенсионеры🧑‍🦳</a></li>
+            <li><a href="#item5" onclick="showContent('item5')">Любители культуры🏛</a></li>
+            <li><a href="#item6" onclick="showContent('item6')">Семейный🌄</a></li>
+        </ul>
+    </div>
+
+    <div class="content" id="content">
+        <!-- Kazakh Content -->
+        <div id="item0-kz" class="content-item kz">
+            <h1>Басты бет</h1>
+            <p>Алматы қаласының жаңа құрылыс картасы</p>
+            <iframe src="map/wow.html" width="100%" height="500px" style="border:none;"></iframe>
+        </div>
+        <div id="item1-kz" class="content-item kz">
+            <h1>Жастар үшін</h1>
+            <div class="flex-container">
+                <div class="text-section">
+                    <p onClick="showImage('comfort')">Заманауи және ыңғайлы пәтерлер қолжетімді бағамен.</p>
+                    <p onclick="showImage('transport')">Көлік қолжетімділігі</p>
+                    <p onclick="showImage('safety')">Қауіпсіздік</p>
+                    <p onclick="showImage('shops')">Дүкендер мен қызметтер</p>
+                    <p onclick="showImage('health')">Денсаулық сақтау</p>
+                    <p onclick="showImage('education')">Білім беру және даму</p>
+                    <p onclick="showImage('eco')">Экологиялық жағдай</p>
+                    <div class="image-container">
+                        <img id="comfort" class="hidden" src="/FutureCEO/sovdomi.avif" alt="Заманауи және ыңғайлы пәтерлер қолжетімді бағамен.">
+                        <img id="transport" class="hidden" src="/FutureCEO/traansport.jpeg" alt="Көлік қолжетімділігі">
+                        <img id="safety" class="hidden" src="/FutureCEO/securityy.jpeg" alt="Қауіпсіздік">
+                        <img id="shops" class="hidden" src="/FutureCEO/shops.jpeg" alt="Дүкендер мен қызметтер">
+                        <img id="health" class="hidden" src="/FutureCEO/health.png" alt="Денсаулық сақтау">
+                        <img id="education" class="hidden" src="/FutureCEO/school.webp" alt="Білім беру және даму">
+                        <img id="eco" class="hidden" src="/FutureCEO/ecological.jpeg" alt="Экологиялық жағдай">
+                    </div>
+                </div>
+                <div class="map-section">
+                    <iframe src="map/youth_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="item2-kz" class="content-item kz">
+            <h1>Кәсіпкерлер</h1>
+            <div class="flex-container">
+                <div class="text-section">
+                    <div class="card">
+                        <p onClick="showImage('infrastructure')">Бизнеске арналған инфрақұрылым: кеңсе ғимараттары мен коворкинг кеңістігінің болуы.</p>
+                        <p onClick="showImage('proximity')">Негізгі жолдарға, әуежайларға және теміржол вокзалдарына жақындық.</p>
+                        <p onClick="showImage('internet')">Тұрақты және жылдам интернет байланысы.</p>
+                        <p onClick="showImage('it_services')">IT қызметтері мен қолдауының болуы.</p>
+                        <p onClick="showImage('banks')">Банктерге, заңгерлік және бухгалтерлік фирмаларға жақындық.</p>
+                        <p onClick="showImage('logistics')">Жеткізу және логистикалық қызметтер.</p>
+                        <p onClick="showImage('conference')">Конференц-залдар мен жиналыс орындары.</p>
+                        <p onClick="showImage('networking')">Іскерлік байланыс желісі және қоғамдастық.</p>
+                        <p onClick="showImage('staff_facilities')">Кадрларға қол жетімділік: қызметкерлерге ыңғайлылық.</p>
+                        <p onClick="showImage('gyms')">Спорт залдары мен демалыс аймақтары.</p>
+                        <p onClick="showImage('medical')">Медициналық мекемелер мен сақтандыру компаниялары.</p>
+                        <p onClick="showImage('security')">Қауіпсіздік: кеңсе ғимараттарын қорғау және бейнебақылау.</p>
+                        <p onClick="showImage('crime')">Шағын аудандағы қылмыс деңгейі төмен.</p>
+                        <p onClick="showImage('legal_support')">Заңгерлік қолдау.</p>
+                        <p onClick="showImage('marketing')">Маркетинг және жарнама мүмкіндіктері.</p>
+                    </div>
+                    <div class="image-container">
+                        <img id="infrastructure" class="hidden" src="/FutureCEO/co-working-930x620.webp" alt="Бизнеске арналған инфрақұрылым: кеңсе ғимараттары мен коворкинг кеңістігінің болуы.">
+                        <img id="proximity" class="hidden" src="/FutureCEO/1708948920050.png" alt="Негізгі жолдарға, әуежайларға және теміржол вокзалдарына жақындық.">
+                        <img id="internet" class="hidden" src="/FutureCEO/generative-ai-illustration-of-high-speed-internet-connection-visualized-telecommunication-network-above-city-wireless-mobile-internet-technology-for-smart-grid-or-5g-lte-data-connection-photo.jpg" alt="Тұрақты және жылдам интернет байланысы.">
+                        <img id="it_services" class="hidden" src="/FutureCEO/AIaaS.webp" alt="IT қызметтері мен қолдауының болуы.">
+                        <img id="banks" class="hidden" src="/FutureCEO/dbank29_1638185392.webp" alt="Банктерге, заңгерлік және бухгалтерлік фирмаларға жақындық.">
+                        <img id="logistics" class="hidden" src="/FutureCEO/1691515982586.jpeg" alt="Жеткізу және логистикалық қызметтер.">
+                        <img id="conference" class="hidden" src="/FutureCEO/77fc67c5-3a0d-4e3a-9899-3c035655d95e.png.jpeg" alt="Конференц-залдар мен жиналыс орындары.">
+                        <img id="networking" class="hidden" src="/FutureCEO/networking.jpeg" alt="Іскерлік байланыс желісі және қоғамдастық.">
+                        <img id="staff_facilities" class="hidden" src="/FutureCEO/AdobeStock_640699373-scaled.jpeg" alt="Кадрларға қол жетімділік: қызметкерлерге ыңғайлылық.">
+                        <img id="gyms" class="hidden" src="/FutureCEO/gyms.avif" alt="Спорт залдары мен демалыс аймақтары.">
+                        <img id="medical" class="hidden" src="/FutureCEO/4.13.23_AI_In_Health.jpg" alt="Медициналық мекемелер мен сақтандыру компаниялары.">
+                        <img id="security" class="hidden" src="/FutureCEO/security-camera-busy-city-square-using-facial-recognition-technology-monitor-pedestrians-generative-ai-illustration_124717-2430.jpg.avif" alt="Қауіпсіздік: кеңсе ғимараттарын қорғау және бейнебақылау.">
+                        <img id="crime" class="hidden" src="/FutureCEO/crime.webp" alt="Шағын аудандағы қылмыс деңгейі төмен.">
+                        <img id="legal_support" class="hidden" src="/FutureCEO/legal support.jpeg" alt="Заңгерлік қолдау.">
+                        <img id="marketing" class="hidden" src="/FutureCEO/marketing-1024x594.jpeg.webp" alt="Маркетинг және жарнама мүмкіндіктері.">
+                    </div>
+                </div>
+                <div class="map-section">
+                    <iframe src="map/business_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="item3-kz" class="content-item kz">
+            <h1>Спортшылар</h1>
+            <div class="flex-container">
+                <div class="text-section">
+                    <div class="card-container">
+                        <div class="card">
+                            <p onClick="showImage('parasports')">Параспортшыларға арналған инфрақұрылым: қол жетімді спорт нысандары және шексіз мүмкіндіктері бар адамдарға арналған бағдарламалар.</p>
+                            <p onClick="showImage('stadiums')">Спорт нысандары: Стадиондар, спорт залдары және фитнес орталықтары.</p>
+                            <p onClick="showImage('pools')">Бассейндер.</p>
+                            <p onClick="showImage('fields')">Әр түрлі спорт түрлеріне арналған арнайы алаңдар (футбол, баскетбол, теннис, жүгіру жолдары)</p>
+                            <p onClick="showImage('parks')">Ашық жаттығу аймақтары: саябақтар мен жүгіру аймақтары.</p>
+                            <p onClick="showImage('outdoor_gyms')">Ауладағы жаттығу жасау орындары</p>
+                            <p onClick="showImage('recovery_centers')">Қалпына келтіру орталықтары</p>
+                            <p onClick="showImage('medical_centers')">Медициналық орталықтар мен спорттық медицина клиникалары.</p>
+                            <p onClick="showImage('safety')">Спорт объектілеріндегі қауіпсіздік: сапалы жарықтандыру және спорт объектілерін қорғау.</p>
+                        </div>
+                        <div class="image-container">
+                            <img id="parasports" class="hidden" src="/FutureCEO/parasports.webp" alt="Параспортшыларға арналған инфрақұрылым: қол жетімді спорт нысандары және шексіз мүмкіндіктері бар адамдарға арналған бағдарламалар.">
+                            <img id="stadiums" class="hidden" src="/FutureCEO/stadium.jpeg" alt="Спорт нысандары: Стадиондар, спорт залдары және фитнес орталықтары.">
+                            <img id="pools" class="hidden" src="/FutureCEO/pools.jpeg" alt="Бассейндер.">
+                            <img id="fields" class="hidden" src="/FutureCEO/fields for sport.webp" alt="Әр түрлі спорт түрлеріне арналған арнайы алаңдар (футбол, баскетбол, теннис, жүгіру жолдары)">
+                            <img id="parks" class="hidden" src="/FutureCEO/parks.jpeg" alt="Ашық жаттығу аймақтары: саябақтар мен жүгіру аймақтары.">
+                            <img id="outdoor_gyms" class="hidden" src="/FutureCEO/outdoor gyms.jpeg" alt="Ауладағы жаттығу жасау орындары">
+                            <img id="recovery_centers" class="hidden" src="/FutureCEO/recovery centers.jpeg" alt="Қалпына келтіру орталықтары">
+                            <img id="medical_centers" class="hidden" src="/FutureCEO/health.png" alt="Медициналық орталықтар мен спорттық медицина клиникалары.">
+                            <img id="safety" class="hidden" src="/FutureCEO/safetysport.webp" alt="Спорт объектілеріндегі қауіпсіздік: сапалы жарықтандыру және спорт объектілерін қорғау.">
+                        </div>
+                    </div>
+                </div>
+                <div class="map-section">
+                    <iframe src="map/athlete_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="item4-kz" class="content-item kz">
+            <h1>Зейнеткерлер</h1>
+            <div class="flex-container">
+                <div class="text-section">
+                    <div class="card-container">
+                        <div class="card">
+                            <p onClick="showImage('housing')">Тұрғын үй және инфрақұрылым</p>
+                            <p onClick="showImage('housing_details')">Қол жетімді және ыңғайлы тұрғын үй-жайлар (мысалы, кедергісіз пәтерлер, лифттер, тұтқалар).</p>
+                            <p onClick="showImage('medical')">Медициналық көмек</p>
+                            <p onClick="showImage('medical_details')">Емханаларға, ауруханаларға және дәріханаларға жақындық.</p>
+                            <p onClick="showImage('transport')">Қоғамдық көлікке қол жетімділік</p>
+                            <p onClick="showImage('safety_details')">Жақсы жарықтандырылған көшелер мен қоғамдық кеңістіктер.</p>
+                            <p onClick="showImage('patrols')">Полиция патрульдері мен бейнебақылау камераларының болуы.</p>
+                            <p onClick="showImage('shops_details')">Азық-түлік дүкендері мен дәріханалар жаяу қашықтықта жетуге мүмкіндік</p>
+                            <p onClick="showImage('services')">Банктерге, пошта бөлімшелеріне және басқа да маңызды қызметтерге жақындық.</p>
+                            <p onClick="showImage('parks')">Саябақтар мен демалыс аймақтары</p>
+                            <p onClick="showImage('eco')">Экологиялық жағдай</p>
+                        </div>
+                        <div class="image-container">
+                            <img id="housing" class="hidden" src="/FutureCEO/housing.jpeg" alt="Тұрғын үй және инфрақұрылым">
+                            <img id="housing_details" class="hidden" src="/FutureCEO/housing_details.webp" alt="Қол жетімді және ыңғайлы тұрғын үй-жайлар (мысалы, кедергісіз пәтерлер, лифттер, тұтқалар).">
+                            <img id="medical" class="hidden" src="/FutureCEO/health.png" alt="Медициналық көмек">
+                            <img id="medical_details" class="hidden" src="/FutureCEO/4.13.23_AI_In_Health.jpg" alt="Емханаларға, ауруханаларға және дәріханаларға жақындық.">
+                            <img id="transport" class="hidden" src="/FutureCEO/traansport.jpeg" alt="Қоғамдық көлікке қол жетімділік">
+                            <img id="safety_details" class="hidden" src="/FutureCEO/lighting.webp" alt="Жақсы жарықтандырылған көшелер мен қоғамдық кеңістіктер.">
+                            <img id="patrols" class="hidden" src="/FutureCEO/police.webp" alt="Полиция патрульдері мен бейнебақылау камераларының болуы.">
+                            <img id="shops_details" class="hidden" src="/FutureCEO/shop and apteka.avif" alt="Азық-түлік дүкендері мен дәріханалар жаяу қашықтықта жетуге мүмкіндік">
+                            <img id="services" class="hidden" src="/FutureCEO/services.avif" alt="Банктерге, пошта бөлімшелеріне және басқа да маңызды қызметтерге жақындық.">
+                            <img id="parks" class="hidden" src="/FutureCEO/parks.jpeg" alt="Саябақтар мен демалыс аймақтары">
+                            <img id="eco" class="hidden" src="/FutureCEO/ecological.jpeg" alt="Экологиялық жағдай">
+                        </div>
+                    </div>
+                </div>
+                <div class="map-section">
+                    <iframe src="map/seniors_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="item5-kz" class="content-item kz">
+            <h1>Мәдениет сүйер қауым</h1>
+            <div class="flex-container">
+                <div class="text-section">
+                    <div class="card-container">
+                        <div class="card">
+                            <p onClick="showImage('theatres')">Мәдени мекемелер: театрлар, Концерт залдары және опера үйлері.</p>
+                            <p onClick="showImage('museums')">Мұражайлар, галереялар және көрме залдары.</p>
+                            <p onClick="showImage('cinemas')">Кинотеатрлар, арт-хаус кинотеатрлар.</p>
+                            <p onClick="showImage('libraries')">Кітапханалар мен кітап дүкендері: қоғамдастық және қызығушылық клубтары.</p>
+                            <p onClick="showImage('architecture')">Қалалық кеңістік және сәулет</p>
+                            <p onClick="showImage('landmarks')">Қоғамдық орындардағы сәулеттік көрікті жерлер мен өнер қондырғылары.</p>
+                            <p onClick="showImage('squares')">Мәдени іс-шаралар өткізілетін алаңдар, саябақтар мен жағалаулар.</p>
+                        </div>
+                        <div class="image-container">
+                            <img id="theatres" class="hidden" src="/FutureCEO/theatre.avif" alt="Мәдени мекемелер: театрлар, Концерт залдары және опера үйлері.">
+                            <img id="museums" class="hidden" src="/FutureCEO/museum.avif" alt="Мұражайлар, галереялар және көрме залдары.">
+                            <img id="cinemas" class="hidden" src="/FutureCEO/cinema.avif" alt="Кинотеатрлар, арт-хаус кинотеатрлар.">
+                            <img id="libraries" class="hidden" src="/FutureCEO/libraries.webp" alt="Кітапханалар мен кітап дүкендері: қоғамдастық және қызығушылық клубтары.">
+                            <img id="architecture" class="hidden" src="/FutureCEO/architecture.jpeg" alt="Қалалық кеңістік және сәулет">
+                            <img id="landmarks" class="hidden" src="/FutureCEO/landmarks.jpeg" alt="Қоғамдық орындардағы сәулеттік көрікті жерлер мен өнер қондырғылары.">
+                            <img id="squares" class="hidden" src="/FutureCEO/squares.avif" alt="Мәдени іс-шаралар өткізілетін алаңдар, саябақтар мен жағалаулар.">
+                        </div>
+                    </div>
+                </div>
+                <div class="map-section">
+                    <iframe src="map/culture_lovers_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="item6-kz" class="content-item kz">
+            <h1>Отбасылық</h1>
+            <div class="flex-container">
+                <div class="text-section">
+                    <div class="card-container">
+                        <div class="card">
+                            <p onClick="showImage('studios')">Балалар алаңдары мен ойын аймақтары</p>
+                            <p onClick="showImage('edu')">Білім беру мекемелері</p>
+                            <p onClick="showImage('coworking')">Көлік қолжетімділігі</p>
+                            <p onClick="showImage('museums')">Мұражайлар мен галереялар, Театрлар мен концерт залдары, Парктер мен скверлер</p>
+                            <p onClick="showImage('landmarks')">Дүкендер мен медициналық мекемелер</p>
+                            <p onClick="showImage('art_shops')">Мүмкіндігі шектеулі адамдарға арналған ыңғайлылықтар</p>
+                        </div>
+                        <div class="image-container">
+                            <img id="studios" class="hidden" src="/FutureCEO/studios.jpeg" alt="Балалар алаңдары мен ойын аймақтары">
+                            <img id="edu" class="hidden" src="/FutureCEO/art_studios.avif" alt="Білім беру мекемелері">
+                            <img id="coworking" class="hidden" src="/FutureCEO/coworking.webp" alt="Көлік қолжетімділігі">
+                            <img id="museums" class="hidden" src="/FutureCEO/museum.avif" alt="Мұражайлар мен галереялар, Театрлар мен концерт залдары, Парктер мен скверлер">
+                            <img id="landmarks" class="hidden" src="/FutureCEO/landmarks.jpeg" alt="Дүкендер мен медициналық мекемелер">
+                            <img id="art_shops" class="hidden" src="/FutureCEO/art shops.png" alt="Мүмкіндігі шектеулі адамдарға арналған ыңғайлылықтар">
+                        </div>
+                    </div>
+                </div>
+                <div class="map-section">
+                    <iframe src="map/family_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="content" id="content">
+            <!-- English Content -->
+            <div id="item0-en" class="content-item en">
+                <h1>Home</h1>
+                <p>Map of new buildings in the city of Almaty</p>
+                <iframe src="map/wow.html" width="100%" height="500px" style="border:none;"></iframe>
+            </div>
+
+            <div id="item1-en" class="content-item en">
+                <h1>Youth</h1>
+                <div class="flex-container">
+                    <div class="text-section">
+                        <p onClick="showImage('comfort')">Modern and comfortable apartments at an affordable price.</p>
+                        <p onClick="showImage('transport')">Transport accessibility</p>
+                        <p onClick="showImage('safety')">Safety</p>
+                        <p onClick="showImage('shops')">Shops and services</p>
+                        <p onClick="showImage('health')">Healthcare</p>
+                        <p onClick="showImage('education')">Education and development</p>
+                        <p onClick="showImage('eco')">Ecological environment</p>
+                        <div class="image-container">
+                            <img id="comfort" class="hidden" src="/FutureCEO/sovdomi.avif" alt="Modern and comfortable apartments at an affordable price.">
+                            <img id="transport" class="hidden" src="/FutureCEO/traansport.jpeg" alt="Transport accessibility">
+                            <img id="safety" class="hidden" src="/FutureCEO/securityy.jpeg" alt="Safety">
+                            <img id="shops" class="hidden" src="/FutureCEO/shops.jpeg" alt="Shops and services">
+                            <img id="health" class="hidden" src="/FutureCEO/health.png" alt="Healthcare">
+                            <img id="education" class="hidden" src="/FutureCEO/school.webp" alt="Education and development">
+                            <img id="eco" class="hidden" src="/FutureCEO/ecological.jpeg" alt="Ecological environment">
+                        </div>
+                    </div>
+                    <div class="map-section">
+                        <iframe src="map/youth_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div id="item2-en" class="content-item en">
+                <h1>Businessmen</h1>
+                 <div class="flex-container">
+                    <div class="text-section">
+                        <div class="card">
+                            <p onClick="showImage('infrastructure')">Business infrastructure: Availability of office buildings and coworking spaces.</p>
+                            <p onClick="showImage('proximity')">Proximity to major roads, airports, and train stations.</p>
+                            <p onClick="showImage('internet')">Stable and fast internet connection.</p>
+                            <p onClick="showImage('it_services')">Availability of IT services and support.</p>
+                            <p onClick="showImage('banks')">Proximity to banks, legal and accounting firms.</p>
+                            <p onClick="showImage('logistics')">Delivery and logistics services.</p>
+                            <p onClick="showImage('conference')">Conference rooms and meeting places.</p>
+                            <p onClick="showImage('networking')">Business network and community.</p>
+                            <p onClick="showImage('staff_facilities')">Access to personnel: Employee facilities.</p>
+                            <p onClick="showImage('gyms')">Gyms and recreational areas.</p>
+                            <p onClick="showImage('medical')">Medical facilities and insurance companies.</p>
+                            <p onClick="showImage('security')">Security: Office building security and video surveillance.</p>
+                            <p onClick="showImage('crime')">Low crime rate in the area.</p>
+                            <p onClick="showImage('legal_support')">Legal support.</p>
+                            <p onClick="showImage('marketing')">Marketing and advertising opportunities.</p>
+                        </div>
+                        <div class="image-container">
+                            <img id="infrastructure" class="hidden" src="/FutureCEO/co-working-930x620.webp" alt="Business infrastructure: Availability of office buildings and coworking spaces.">
+                            <img id="proximity" class="hidden" src="/FutureCEO/1708948920050.png" alt="Proximity to major roads, airports, and train stations.">
+                            <img id="internet" class="hidden" src="/FutureCEO/generative-ai-illustration-of-high-speed-internet-connection-visualized-telecommunication-network-above-city-wireless-mobile-internet-technology-for-smart-grid-or-5g-lte-data-connection-photo.jpg" alt="Stable and fast internet connection.">
+                            <img id="it_services" class="hidden" src="/FutureCEO/AIaaS.webp" alt="Availability of IT services and support.">
+                            <img id="banks" class="hidden" src="/FutureCEO/dbank29_1638185392.webp" alt="Proximity to banks, legal and accounting firms.">
+                            <img id="logistics" class="hidden" src="/FutureCEO/1691515982586.jpeg" alt="Delivery and logistics services.">
+                            <img id="conference" class="hidden" src="/FutureCEO/77fc67c5-3a0d-4e3a-9899-3c035655d95e.png.jpeg" alt="Conference rooms and meeting places.">
+                            <img id="networking" class="hidden" src="/FutureCEO/networking.jpeg" alt="Business network and community.">
+                            <img id="staff_facilities" class="hidden" src="/FutureCEO/AdobeStock_640699373-scaled.jpeg" alt="Access to personnel: Employee facilities.">
+                            <img id="gyms" class="hidden" src="/FutureCEO/gyms.avif" alt="Gyms and recreational areas.">
+                            <img id="medical" class="hidden" src="/FutureCEO/4.13.23_AI_In_Health.jpg" alt="Medical facilities and insurance companies.">
+                            <img id="security" class="hidden" src="/FutureCEO/security-camera-busy-city-square-using-facial-recognition-technology-monitor-pedestrians-generative-ai-illustration_124717-2430.jpg.avif" alt="Security: Office building security and video surveillance.">
+                            <img id="crime" class="hidden" src="/FutureCEO/crime.webp" alt="Low crime rate in the area.">
+                            <img id="legal_support" class="hidden" src="/FutureCEO/legal support.jpeg" alt="Legal support.">
+                            <img id="marketing" class="hidden" src="/FutureCEO/marketing-1024x594.jpeg.webp" alt="Marketing and advertising opportunities.">
+                        </div>
+                    </div>
+                     <div class="map-section">
+                        <iframe src="map/business_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
+                 </div>
+            </div>
+
+            <div id="item3-en" class="content-item en">
+                <h1>Athletes</h1>
+                <div class="flex-container">
+                    <div class="text-section">
+                        <div class="card-container">
+                            <div class="card">
+                                <p onClick="showImage('stadiums')">Sports facilities: Stadiums, gyms, and fitness centers.</p>
+                                <p onClick="showImage('pools')">Swimming pools.</p>
+                                <p onClick="showImage('fields')">Special sports fields (football, basketball, tennis, running tracks).</p>
+                                <p onClick="showImage('parks')">Outdoor training areas: Parks and running zones.</p>
+                                <p onClick="showImage('outdoor_gyms')">Outdoor bars and exercise equipment.</p>
+                                <p onClick="showImage('recovery_centers')">Rehabilitation centers.</p>
+                                <p onClick="showImage('medical_centers')">Medical centers and sports medicine clinics.</p>
+                                <p onClick="showImage('safety')">Safety at sports facilities: Quality lighting and security of sports facilities.</p>
+                                <p onClick="showImage('parasports')">Infrastructure for para-athletes: Accessible sports facilities and programs for people with endless possibilities.</p>
+                            </div>
+                            <div class="image-container">
+                                <img id="stadiums" class="hidden" src="/FutureCEO/stadium.jpeg" alt="Sports facilities: Stadiums, gyms, and fitness centers.">
+                                <img id="pools" class="hidden" src="/FutureCEO/pools.jpeg" alt="Swimming pools.">
+                                <img id="fields" class="hidden" src="/FutureCEO/fields for sport.webp" alt="Special sports fields (football, basketball, tennis, running tracks).">
+                                <img id="parks" class="hidden" src="/FutureCEO/parks.jpeg" alt="Outdoor training areas: Parks and running zones.">
+                                <img id="outdoor_gyms" class="hidden" src="/FutureCEO/outdoor gyms.jpeg" alt="Outdoor bars and exercise equipment.">
+                                <img id="recovery_centers" class="hidden" src="/FutureCEO/recovery centers.jpeg" alt="Rehabilitation centers.">
+                                <img id="medical_centers" class="hidden" src="/FutureCEO/health.png" alt="Medical centers and sports medicine clinics.">
+                                <img id="safety" class="hidden" src="/FutureCEO/safetysport.webp" alt="Safety at sports facilities: Quality lighting and security of sports facilities.">
+                                <img id="parasports" class="hidden" src="/FutureCEO/parasports.webp" alt="Infrastructure for para-athletes: Accessible sports facilities and programs for people with endless possibilities.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-section">
+                        <iframe src="map/athlete_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div id="item4-en" class="content-item en">
+                <h1>Retirees</h1>
+                <div class="flex-container">
+                    <div class="text-section">
+                        <div class="card-container">
+                            <div class="card">
+                                <p onClick="showImage('housing')">Apartment conditions and infrastructure elements</p>
+                                <p onClick="showImage('housing_details')">Housing and infrastructure: Affordable and convenient housing </p>
+                                <p onClick="showImage('medical')">hospitals, and pharmacies</p>
+                                <p onClick="showImage('medical_details')">Medical care: Proximity to clinics</p>
+                                <p onClick="showImage('transport')">Transport accessibility: Convenient and accessible public transport routes.</p>
+                                <p onClick="showImage('safety_details')">Safety: Well-lit streets and public spaces</p>
+                                <p onClick="showImage('patrols')">Presence of police patrols and video surveillance cameras.</p>
+                                <p onClick="showImage('shops_details')">Shops and services: Grocery stores and pharmacies within walking distance.</p>
+                                <p onClick="showImage('services')">Proximity to banks, post offices, and other important services.</p>
+                                <p onClick="showImage('parks')">Parks and recreation areas: Parks, squares, and walking areas.</p>
+                                <p onClick="showImage('eco')">Environmental conditions: Clean air and greenery.</p>
+                            </div>
+                            <div class="image-container">
+                                <img id="housing" class="hidden" src="/FutureCEO/housing.jpeg" alt="Apartment conditions and infrastructure elements">
+                                <img id="housing_details" class="hidden" src="/FutureCEO/housing_details.webp" alt="Housing and infrastructure: Affordable and convenient housing ">
+                                <img id="medical" class="hidden" src="/FutureCEO/health.png" alt="hospitals, and pharmacies">
+                                <img id="medical_details" class="hidden" src="/FutureCEO/4.13.23_AI_In_Health.jpg" alt="Medical care: Proximity to clinics">
+                                <img id="transport" class="hidden" src="/FutureCEO/traansport.jpeg" alt="Transport accessibility: Convenient and accessible public transport routes.">
+                                <img id="safety_details" class="hidden" src="/FutureCEO/lighting.webp" alt="Safety: Well-lit streets and public spaces">
+                                <img id="patrols" class="hidden" src="/FutureCEO/police.webp" alt="Presence of police patrols and video surveillance cameras.">
+                                <img id="shops_details" class="hidden" src="/FutureCEO/shop and apteka.avif" alt="Shops and services: Grocery stores and pharmacies within walking distance.">
+                                <img id="services" class="hidden" src="/FutureCEO/services.avif" alt="Proximity to banks, post offices, and other important services.">
+                                <img id="parks" class="hidden" src="/FutureCEO/parks.jpeg" alt="Parks and recreation areas: Parks, squares, and walking areas.">
+                                <img id="eco" class="hidden" src="/FutureCEO/ecological.jpeg" alt="Environmental conditions: Clean air and greenery.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-section">
+                        <iframe src="map/seniors_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div id="item5-en" class="content-item en">
+                <h1>Culture Lovers</h1>
+                <div class="flex-container">
+                    <div class="text-section">
+                        <div class="card-container">
+                            <div class="card">
+                                <p onClick="showImage('theatres')">Theaters, concert halls</p>
+                                <p onClick="showImage('museums')">Galleries, and exhibition halls.</p>
+                                <p onClick="showImage('cinemas')">Cinemas, including art-house cinemas</p>
+                                <p onClick="showImage('libraries')">Libraries and bookstores</p>
+                                <p onClick="showImage('architecture')">Community and interest clubs Urban space and architecture</p>
+                                <p onClick="showImage('landmarks')">Architectural landmarks and art installations in public places</p>
+                                <p onClick="showImage('squares')">Squares, parks, and embankments where cultural events are held</p>
+                            </div>
+                            <div class="image-container">
+                                <img id="theatres" class="hidden" src="/FutureCEO/theatre.avif" alt="Theaters, concert halls, galleries, and exhibition halls.">
+                                <img id="museums" class="hidden" src="/FutureCEO/museum.avif" alt="Galleries, and exhibition halls.">
+                                <img id="cinemas" class="hidden" src="/FutureCEO/cinema.avif" alt="Cinemas, including art-house cinemas.">
+                                <img id="libraries" class="hidden" src="/FutureCEO/libraries.webp" alt="Libraries and bookstores">
+                                <img id="architecture" class="hidden" src="/FutureCEO/architecture.jpeg" alt="Community and interest clubs Urban space and architecture">
+                                <img id="landmarks" class="hidden" src="/FutureCEO/landmarks.jpeg" alt="Architectural landmarks and art installations in public places">
+                                <img id="squares" class="hidden" src="/FutureCEO/squares.avif" alt="Squares, parks, and embankments where cultural events are held">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-section">
+                        <iframe src="map/culture_lovers_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div id="item6-en" class="content-item en">
+                <h1>Family</h1>
+                <div class="flex-container">
+                    <div class="text-section">
+                        <div class="card-container">
+                            <div class="card">
+                                <p onClick="showImage('studios')">Children's playgrounds and play areas</p>
+                                <p onClick="showImage('edu')">Educational institutions</p>
+                                <p onClick="showImage('coworking')">Transportation accessibility</p>
+                                <p onClick="showImage('museums')">Museums and galleries, Theaters and concert halls, Parks and squares</p>
+                                <p onClick="showImage('landmarks')">Shops and medical facilities</p>
+                                <p onClick="showImage('art_shops')">Accessibility features for people with disabilities</p>
+                            </div>
+                            <div class="image-container">
+                                <img id="studios" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/studios.jpeg" alt="Children's playgrounds and play areas">
+                                <img id="edu" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/art_studios.avif" alt="Educational institutions">
+                                <img id="coworking" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/coworking.webp" alt="Transportation accessibility">
+                                <img id="museums" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/museum.avif" alt="Museums and galleries, Theaters and concert halls, Parks and squares">
+                                <img id="landmarks" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/landmarks.jpeg" alt="Shops and medical facilities">
+                                <img id="art_shops" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/art shops.png" alt="Accessibility features for people with disabilities">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-section">
+                        <iframe src="map/family_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="content" id="content">
+                <!-- Russian Content -->
+                <div id="item0-ru" class="content-item ru">
+                    <h1>Главная</h1>
+                    <p>Карта новостроек города Алматы</p>
+                    <iframe src="map/wow.html" width="100%" height="500px" style="border:none;"></iframe>
+                </div>
+                <div id="item1-ru" class="content-item ru">
+                    <h1>Молодёжи</h1>
+                    <div class="flex-container">
+                        <div class="text-section">
+                            <p onClick="showImage('comfort')">Современные и удобные квартиры по доступной цене.</p>
+                            <p onclick="showImage('transport')">Транспортная доступность </p>
+                            <p onclick="showImage('safety')">Безопасность </p>
+                            <p onclick="showImage('shops')">Магазины и услуги</p>
+                            <p onclick="showImage('health')">Здравоохранение </p>
+                            <p onclick="showImage('education')">Образование и развитие</p>
+                            <p onclick="showImage('eco')">Экологическая обстановка</p>
+                            <div class="image-container">
+                                <img id="comfort" class="hidden" src="/FutureCEO/sovdomi.avif" alt="Современные и удобные квартиры по доступной цене.">
+                                <img id="transport" class="hidden" src="/FutureCEO/traansport.jpeg" alt="Транспортная доступность">
+                                <img id="safety" class="hidden" src="/FutureCEO/securityy.jpeg" alt="Безопасность">
+                                <img id="shops" class="hidden" src="/FutureCEO/shops.jpeg" alt="Магазины и услуги">
+                                <img id="health" class="hidden" src="/FutureCEO/health.png" alt="Здравоохранение">
+                                <img id="education" class="hidden" src="/FutureCEO/school.webp" alt="Образование и развитие">
+                                <img id="eco" class="hidden" src="/FutureCEO/ecological.jpeg" alt="Экологическая обстановка">
+                            </div>
+                        </div>
+                        <div class="map-section">
+                            <iframe src="map/youth_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div id="item2-ru" class="content-item ru">
+                    <h1>Бизнесмены</h1>
+                    <div class="flex-container">
+                        <div class="text-section">
+                            <div class="card">
+                                <p onClick="showImage('infrastructure')">Инфраструктура для бизнеса: Наличие офисных зданий и коворкинг-пространств.</p>
+                                <p onClick="showImage('proximity')">Близость к основным дорогам, аэропортам и железнодорожным станциям.</p>
+                                <p onClick="showImage('internet')">Стабильное и быстрое интернет-соединение.</p>
+                                <p onClick="showImage('it_services')">Наличие IT-сервисов и поддержки.</p>
+                                <p onClick="showImage('banks')">Близость к банкам, юридическим и бухгалтерским фирмам.</p>
+                                <p onClick="showImage('logistics')">Сервисы по доставке и логистике.</p>
+                                <p onClick="showImage('conference')">Конференц-залы и места для встреч.</p>
+                                <p onClick="showImage('networking')">Сеть деловых контактов и сообщество.</p>
+                                <p onClick="showImage('staff_facilities')">Доступ к кадрам: Удобства для сотрудников.</p>
+                                <p onClick="showImage('gyms')">Спортивные залы и зоны для отдыха.</p>
+                                <p onClick="showImage('medical')">Медицинские учреждения и страховые компании.</p>
+                                <p onClick="showImage('security')">Безопасность: Охрана офисных зданий и видеонаблюдение.</p>
+                                <p onClick="showImage('crime')">Низкий уровень преступности в районе.</p>
+                                <p onClick="showImage('legal_support')">Юридическая поддержка.</p>
+                                <p onClick="showImage('marketing')">Маркетинговые и рекламные возможности.</p>
+                            </div>
+                            <div class="image-container">
+                                <img id="infrastructure" class="hidden" src="/FutureCEO/co-working-930x620.webp" alt="Инфраструктура для бизнеса: Наличие офисных зданий и коворкинг-пространств.">
+                                <img id="proximity" class="hidden" src="/FutureCEO/1708948920050.png" alt="Близость к основным дорогам, аэропортам и железнодорожным станциям.">
+                                <img id="internet" class="hidden" src="/FutureCEO/generative-ai-illustration-of-high-speed-internet-connection-visualized-telecommunication-network-above-city-wireless-mobile-internet-technology-for-smart-grid-or-5g-lte-data-connection-photo.jpg" alt="Стабильное и быстрое интернет-соединение.">
+                                <img id="it_services" class="hidden" src="/FutureCEO/AIaaS.webp" alt="Наличие IT-сервисов и поддержки.">
+                                <img id="banks" class="hidden" src="/FutureCEO/dbank29_1638185392.webp" alt="Близость к банкам, юридическим и бухгалтерским фирмам.">
+                                <img id="logistics" class="hidden" src="/FutureCEO/1691515982586.jpeg" alt="Сервисы по доставке и логистике.">
+                                <img id="conference" class="hidden" src="/FutureCEO/77fc67c5-3a0d-4e3a-9899-3c035655d95e.png.jpeg" alt="Конференц-залы и места для встреч.">
+                                <img id="networking" class="hidden" src="/FutureCEO/networking.jpeg" alt="Сеть деловых контактов и сообщество.">
+                                <img id="staff_facilities" class="hidden" src="/FutureCEO/AdobeStock_640699373-scaled.jpeg" alt="Доступ к кадрам: Удобства для сотрудников.">
+                                <img id="gyms" class="hidden" src="/FutureCEO/gyms.avif" alt="Спортивные залы и зоны для отдыха.">
+                                <img id="medical" class="hidden" src="/FutureCEO/4.13.23_AI_In_Health.jpg" alt="Медицинские учреждения и страховые компании.">
+                                <img id="security" class="hidden" src="/FutureCEO/security-camera-busy-city-square-using-facial-recognition-technology-monitor-pedestrians-generative-ai-illustration_124717-2430.jpg.avif" alt="Безопасность: Охрана офисных зданий и видеонаблюдение.">
+                                <img id="crime" class="hidden" src="/FutureCEO/crime.webp" alt="Низкий уровень преступности в районе.">
+                                <img id="legal_support" class="hidden" src="/FutureCEO/legal support.jpeg" alt="Юридическая поддержка.">
+                                <img id="marketing" class="hidden" src="/FutureCEO/marketing-1024x594.jpeg.webp" alt="Маркетинговые и рекламные возможности.">
+                            </div>
+                        </div>
+                        <div class="map-section">
+                            <iframe src="map/business_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="item3-ru" class="content-item ru">
+                    <h1>Спортсмены</h1>
+                    <div class="flex-container">
+                        <div class="text-section">
+                            <div class="card-container">
+                                <div class="card">
+                                    <p onClick="showImage('stadiums')">Спортивные объекты: Стадионы, спортивные залы и фитнес-центры.</p>
+                                    <p onClick="showImage('pools')">Плавательные бассейны.</p>
+                                    <p onClick="showImage('fields')">Специальные площадки для различных видов спорта (футбол, баскетбол, теннис, беговые дорожки).</p>
+                                    <p onClick="showImage('parks')">Тренировочные зоны на открытом воздухе: Парки и зоны для бега.</p>
+                                    <p onClick="showImage('outdoor_gyms')">Турники и тренажеры на свежем воздухе.</p>
+                                    <p onClick="showImage('recovery_centers')">Восстановительные центры:</p>
+                                    <p onClick="showImage('medical_centers')">Mедицинские центры и клиники спортивной медицины.</p>
+                                    <p onClick="showImage('safety')">Безопасность на спортивных объектах: Качественное освещение и охрана спортивных объектов.</p>
+                                    <p onClick="showImage('parasports')">Инфраструктура для параспортсменов: Доступные спортивные объекты и программы для людей с бесконечными возможностями.</p>
+                                </div>
+                                <div class="image-container">
+                                    <img id="stadiums" class="hidden" src="/FutureCEO/stadium.jpeg" alt="Спортивные объекты: Стадионы, спортивные залы и фитнес-центры.">
+                                    <img id="pools" class="hidden" src="/FutureCEO/pools.jpeg" alt="Плавательные бассейны.">
+                                    <img id="fields" class="hidden" src="/FutureCEO/fields for sport.webp" alt="Специальные площадки для различных видов спорта (футбол, баскетбол, теннис, беговые дорожки).">
+                                    <img id="parks" class="hidden" src="/FutureCEO/parks.jpeg" alt="Тренировочные зоны на открытом воздухе: Парки и зоны для бега.">
+                                    <img id="outdoor_gyms" class="hidden" src="/FutureCEO/outdoor gyms.jpeg" alt="Турники и тренажеры на свежем воздухе.">
+                                    <img id="recovery_centers" class="hidden" src="/FutureCEO/recovery centers.jpeg" alt="Восстановительные центры.">
+                                    <img id="medical_centers" class="hidden" src="/FutureCEO/health.png" alt="Mедицинские центры и клиники спортивной медицины.">
+                                    <img id="safety" class="hidden" src="/FutureCEO/safetysport.webp" alt="Безопасность на спортивных объектах: Качественное освещение и охрана спортивных объектов.">
+                                    <img id="parasports" class="hidden" src="/FutureCEO/parasports.webp" alt="Инфраструктура для параспортсменов: Доступные спортивные объекты и программы для людей с бесконечными возможностями.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-section">
+                            <iframe src="map/athlete_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="item4-ru" class="content-item ru">
+                    <h1>Пенсионеры</h1>
+                    <div class="flex-container">
+                        <div class="text-section">
+                            <div class="card-container">
+                                <div class="card">
+                                    <p onClick="showImage('housing')">Жилье и инфраструктура:</p>
+                                    <p onClick="showImage('housing_details')">Доступные и удобные жилые помещения (например, квартиры без барьеров, лифты, поручни).</p>
+                                    <p onClick="showImage('medical')">Медицинское обслуживание:</p>
+                                    <p onClick="showImage('medical_details')">Близость к поликлиникам, больницам и аптекам.</p>
+                                    <p onClick="showImage('transport')">Транспортная доступность:</p>
+                                    <p onClick="showImage('safety_details')">Хорошо освещенные улицы и общественные пространства.</p>
+                                    <p onClick="showImage('patrols')">Наличие полицейских патрулей и камер видеонаблюдения.</p>
+                                    <p onClick="showImage('shops_details')">Продуктовые магазины и аптеки в пешей доступности.</p>
+                                    <p onClick="showImage('services')">Близость к банкам, почтовым отделениям и другим важным службам.</p>
+                                    <p onClick="showImage('parks')">Парки и зоны отдыха:</p>
+                                    <p onClick="showImage('eco')">Экологическая обстановка:</p>
+                                </div>
+                                <div class="image-container">
+                                    <img id="housing" class="hidden" src="/FutureCEO/housing.jpeg" alt="Жилье и инфраструктура.">
+                                    <img id="housing_details" class="hidden" src="/FutureCEO/housing_details.webp" alt="Доступные и удобные жилые помещения.">
+                                    <img id="medical" class="hidden" src="/FutureCEO/health.png" alt="Медицинское обслуживание.">
+                                    <img id="medical_details" class="hidden" src="/FutureCEO/4.13.23_AI_In_Health.jpg" alt="Близость к поликлиникам, больницам и аптекам.">
+                                    <img id="transport" class="hidden" src="/FutureCEO/traansport.jpeg" alt="Транспортная доступность.">
+                                    <img id="safety_details" class="hidden" src="/FutureCEO/lighting.webp" alt="Хорошо освещенные улицы и общественные пространства.">
+                                    <img id="patrols" class="hidden" src="/FutureCEO/police.webp" alt="Наличие полицейских патрулей и камер видеонаблюдения.">
+                                    <img id="shops_details" class="hidden" src="/FutureCEO/shop and apteka.avif" alt="Продуктовые магазины и аптеки в пешей доступности.">
+                                    <img id="services" class="hidden" src="/FutureCEO/services.avif" alt="Близость к банкам, почтовым отделениям и другим важным службам.">
+                                    <img id="parks" class="hidden" src="/FutureCEO/parks.jpeg" alt="Парки и зоны отдыха.">
+                                    <img id="eco" class="hidden" src="/FutureCEO/ecological.jpeg" alt="Экологическая обстановка.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-section">
+                            <iframe src="map/seniors_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="item5-ru" class="content-item ru">
+                    <h1>Любители культуры</h1>
+                    <div class="flex-container">
+                        <div class="text-section">
+                            <div class="card-container">
+                                <div class="card">
+                                    <p onClick="showImage('theatres')">Культурные учреждения: Театры, концертные залы и оперные дома.</p>
+                                    <p onClick="showImage('museums')">Музеи, галереи и выставочные залы.</p>
+                                    <p onClick="showImage('cinemas')">Кинотеатры, включая арт-хаус кинотеатры.</p>
+                                    <p onClick="showImage('libraries')">Библиотеки и книжные магазины: Сообщество и клубы по интересам.</p>
+                                    <p onClick="showImage('architecture')">Городское пространство и архитектура:</p>
+                                    <p onClick="showImage('landmarks')">Архитектурные достопримечательности и художественные инсталляции в общественных местах.</p>
+                                    <p onClick="showImage('squares')">Площади, парки и набережные, где проводятся культурные мероприятия.</p>
+                                </div>
+                                <div class="image-container">
+                                    <img id="theatres" class="hidden" src="/FutureCEO/theatre.avif" alt="Культурные учреждения: Театры, концертные залы и оперные дома.">
+                                    <img id="museums" class="hidden" src="/FutureCEO/museum.avif" alt="Музеи, галереи и выставочные залы.">
+                                    <img id="cinemas" class="hidden" src="/FutureCEO/cinema.avif" alt="Кинотеатры, включая арт-хаус кинотеатры.">
+                                    <img id="libraries" class="hidden" src="/FutureCEO/libraries.webp" alt="Библиотеки и книжные магазины: Сообщество и клубы по интересам.">
+                                    <img id="architecture" class="hidden" src="/FutureCEO/architecture.jpeg" alt="Городское пространство и архитектура.">
+                                    <img id="landmarks" class="hidden" src="/FutureCEO/landmarks.jpeg" alt="Архитектурные достопримечательности и художественные инсталляции в общественных местах.">
+                                    <img id="squares" class="hidden" src="/FutureCEO/squares.avif" alt="Площади, парки и набережные, где проводятся культурные мероприятия.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-section">
+                            <iframe src="map/culture_lovers_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="item6-ru" class="content-item ru">
+                    <h1>Семейный</h1>
+                    <div class="flex-container">
+                        <div class="text-section">
+                            <div class="card-container">
+                                <div class="card">
+                                    <p onClick="showImage('studios')">Детские площадки и зоны для игр</p>
+                                    <p onClick="showImage('edu')">Образовательные учреждения</p>
+                                    <p onClick="showImage('coworking')">Транспортная доступность</p>
+                                    <p onClick="showImage('museums')">Музеи и галереи, Театры и концертные залы, Парки и скверы.</p>
+                                    <p onClick="showImage('landmarks')">Магазины и медицинские учреждения</p>
+                                    <p onClick="showImage('art_shops')">Удобства для людей с ограниченными возможностями</p>
+                                </div>
+                                <div class="image-container">
+                                    <img id="studios" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/studios.jpeg" alt="Детские площадки и зоны для игр">
+                                    <img id="edu" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/art_studios.avif" alt="Образовательные учреждения">
+                                    <img id="coworking" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/coworking.webp" alt="Транспортная доступность">
+                                    <img id="museums" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/museum.avif" alt="Музеи и галереи, Театры и концертные залы, Парки и скверы.">
+                                    <img id="landmarks" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/landmarks.jpeg" alt="Магазины и медицинские учреждения">
+                                    <img id="art_shops" class="hidden" src="/Users/ibragimanzir/Desktop/FutureCEO/art shops.png" alt="Удобства для людей с ограниченными возможностями">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-section">
+                            <iframe src="map/family_class_map.html" width="100%" height="500px" style="border:none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="legend">
+                    <div><span class="legend-color" style="background-color: green;"></span> Мектеп</div>
+                    <div><span class="legend-color" style="background-color: lightgreen;"></span> Саябақ</div>
+                    <div><span class="legend-color" style="background-color: orange;"></span> Балабақша</div>
+                    <div><span class="legend-color" style="background-color: darkgreen;"></span> Коворкинг</div>
+                    <div><span class="legend-color" style="background-color: purple;"></span> Спорт алаңы</div>
+                    <div><span class="legend-color" style="background-color: brown;"></span> Ойын-сауық кешені</div>
+                    <div><span class="legend-color" style="background-color: red;"></span> Дәріхана</div>
+                    <div><span class="legend-color" style="background-color: darkred;"></span> Театр</div>
+                    <div><span class="legend-color" style="background-color: darkorange;"></span> Музей</div>
+                    <div><span class="legend-color" style="background-color: lightcoral;"></span> Аурухана</div>
+                </div>
+
+    <script>
+        let currentLanguage = 'kz'; // Язык по умолчанию
+
+        function showContent(item) {
+            const contents = document.querySelectorAll(`.content-item.${currentLanguage}`);
+            contents.forEach(content => content.style.display = 'none');
+
+            const activeContent = document.getElementById(`${item}-${currentLanguage}`);
+            if (activeContent) {
+                activeContent.style.display = 'block';
+            }
+        }
+
+        function switchLanguage(language) {
+            currentLanguage = language;
+            const contentItems = document.querySelectorAll('.content-item');
+            contentItems.forEach(item => item.style.display = 'none');
+
+            // Показать первый элемент на выбранном языке
+            showContent('item0');
+
+            // Обновить ссылки навигации
+            const navLinks = document.querySelectorAll('.sidebar ul li a');
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                const item = href.substring(1); // Удалить символ '#'
+                link.onclick = () => showContent(item);
+                link.textContent = getNavLinkText(item, language);
+            });
+
+            // Обновить заголовок сайдбара
+            updateSidebarHeading(language);
+
+            // Обновить легенду
+            updateLegend(language);
+        }
+
+        function getNavLinkText(item, language) {
+            const texts = {
+                kz: {
+                    item0: 'Басты бет🏠',
+                    item1: 'Жастар🥷',
+                    item2: 'Кәсіпкерлер💸',
+                    item3: 'Спортшылар🏆',
+                    item4: 'Зейнеткерлер🧑‍🦳',
+                    item5: 'Мәдениет сүйер қауым🏛',
+                    item6: 'Отбасылық🌄'
+                },
+                en: {
+                    item0: 'Home🏠',
+                    item1: 'Youth🥷',
+                    item2: 'Businessman💸',
+                    item3: 'Sportsman🏆',
+                    item4: 'Retirees🧑‍🦳',
+                    item5: 'Culture Lovers🏛',
+                    item6: 'Family🌄'
+                },
+                ru: {
+                    item0: 'Главная🏠',
+                    item1: 'Молодёжи🥷',
+                    item2: 'Бизнесмены💸',
+                    item3: 'Спортсмены🏆',
+                    item4: 'Пенсионеры🧑‍🦳',
+                    item5: 'Любители культуры🏛',
+                    item6: 'Семейные🌄',
+                }
+            };
+            return texts[language][item];
+        }
+
+        function updateSidebarHeading(language) {
+            const headings = {
+                kz: 'Жаңа ғимаратты талдау🏗',
+                en: 'New Building Analysis🏗',
+                ru: 'Анализ новостройки🏗'
+            };
+            const headingElement = document.getElementById('sidebar-heading');
+            headingElement.textContent = headings[language];
+        }
+
+        function updateLegend(language) {
+            const legendTexts = {
+                kz: {
+                    school: 'Мектеп',
+                    park: 'Саябақ',
+                    kindergarten: 'Балабақша',
+                    coworking: 'Коворкинг',
+                    sportField: 'Спорт алаңы',
+                    entertainment: 'Ойын-сауық кешені',
+                    gym: 'Спортзал',
+                    pharmacy: 'Дәріхана',
+                    theater: 'Театр',
+                    museum: 'Музей',
+                    hospital: 'Аурухана'
+                },
+                en: {
+                    school: 'School',
+                    park: 'Park',
+                    kindergarten: 'Kindergarten',
+                    coworking: 'Coworking',
+                    sportField: 'Sport Field',
+                    entertainment: 'Entertainment Complex',
+                    gym: 'Gym',
+                    pharmacy: 'Pharmacy',
+                    theater: 'Theater',
+                    museum: 'Museum',
+                    hospital: 'Hospital'
+                },
+                ru: {
+                    school: 'Школа',
+                    park: 'Парк',
+                    kindergarten: 'Детский сад',
+                    coworking: 'Коворкинг',
+                    sportField: 'Спортивная площадка',
+                    entertainment: 'Развлекательный комплекс',
+                    gym: 'Спортзал',
+                    pharmacy: 'Аптека',
+                    theater: 'Театр',
+                    museum: 'Музей',
+                    hospital: 'Больница'
+                }
+            };
+
+            const legendItems = {
+                'green': 'school',
+                'lightgreen': 'park',
+                'orange': 'kindergarten',
+                'darkgreen': 'coworking',
+                'purple': 'sportField',
+                'brown': 'entertainment',
+                'purple': 'gym',
+                'red': 'pharmacy',
+                'darkred': 'theater',
+                'darkorange': 'museum',
+                'lightcoral': 'hospital'
+            };
+
+            for (const color in legendItems) {
+                const itemText = document.querySelector(`.legend-color[style*="background-color: ${color}"]`).parentNode;
+                itemText.childNodes[1].nodeValue = ` ${legendTexts[language][legendItems[color]]}`;
+            }
+        }
+
+        function showImage(id) {
+            document.querySelectorAll('.image-container img').forEach(img => {
+                img.classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        // Инициализация с языком по умолчанию
+        document.addEventListener('DOMContentLoaded', () => {
+            switchLanguage(currentLanguage);
+        });
+    </script>
+</body>
+</html>
